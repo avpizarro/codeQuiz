@@ -47,3 +47,16 @@ button {
     width: 110px;
     border: none;
 }
+
+.scores {
+    padding-top: 60px;
+    text-align: left;
+}
+
+ul {
+    padding-inline-start: 0px;
+}
+.clear {
+    width: 220px;
+
+}
