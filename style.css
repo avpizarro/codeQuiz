@@ -44,8 +44,11 @@ button {
     font-size: 18px;
     height: 1.5em;
     border-radius: 5px;
-    width: 110px;
+    width: 130px;
+    padding-left: 10px;
+    padding-right: 10px;
     border: none;
+    line-height: 1em;
 }
 
 .scores {
