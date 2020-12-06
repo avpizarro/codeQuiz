@@ -2,7 +2,6 @@ var startBtn = document.querySelector(".start");
 var timer = document.querySelector(".timer");
 var question = document.querySelector("h1");
 var answerButtons = document.querySelector(".answerButtons");
-console.log(answerButtons);
 var line = document.createElement("hr");
 var response = document.createElement("div");
 response.setAttribute("style", "text-align: left; font-style: italic; color: rgb(151, 149, 149);");
@@ -20,13 +19,11 @@ startBtn.addEventListener("click", function(){
         timer.textContent = ("Time: " + timeLeft);
 
         // Stop the timer
-        if(timeLeft === 0)
-        clearInterval(quizTimer)
-
+        if(timeLeft<= 0) {
+        clearInterval(quizTimer);
+        }
+        
     },1000); 
-
-    console.log(timer);
-    console.log(timeLeft);
 
     // Ask first question
     question.innerHTML = "Commonly used data types DO NOT include:";
@@ -43,7 +40,6 @@ startBtn.addEventListener("click", function(){
         answerButtons.appendChild(btn);
         btn.setAttribute("style", "float: left; margin-right: 90%; margin-top: 5px; margin-bottom: 5px; text-align: left;");
         btn.classList.add(answers[i]);
-        console.log(btn);
     
         //Make the first question answer buttons clickable
         btn.addEventListener("click",function(event){
@@ -67,10 +63,6 @@ startBtn.addEventListener("click", function(){
                 btn.setAttribute("style", "float: left; margin-right: 90%; margin-top: 5px; margin-bottom: 5px; text-align: left; width: 180px;");
                 btn.classList.add(answers[i].replace(/\s/g, ''));
 
-                /*var line = document.createElement("hr");
-                answerButtons.appendChild(line);
-                var response = document.createElement("div");
-                response.setAttribute("style", "text-align: left; font-style: italic; color: rgb(151, 149, 149);");*/
 
                 if (element === correctAnswer1) {
                     response.textContent = ("Correct!");
@@ -82,6 +74,7 @@ startBtn.addEventListener("click", function(){
                     response.textContent = ("Wrong!");
                     answerButtons.appendChild(line);
                     answerButtons.appendChild(response);
+                    timeLeft = (timeLeft - 10);
                 }
 
                 //Make the second question answer buttons clickables
@@ -123,6 +116,7 @@ startBtn.addEventListener("click", function(){
                             response.textContent = ("Wrong!");
                             answerButtons.appendChild(line);
                             answerButtons.appendChild(response);
+                            timeLeft = (timeLeft - 10);
                         }
 
                         //Make the third question answer buttons clickable
@@ -160,6 +154,7 @@ startBtn.addEventListener("click", function(){
                                     response.textContent = ("Wrong!");
                                     answerButtons.appendChild(line);
                                     answerButtons.appendChild(response);
+                                    timeLeft = (timeLeft - 10);
                                 }
 
                                 btn.addEventListener("click",function(event){
@@ -195,51 +190,76 @@ startBtn.addEventListener("click", function(){
                                             response.textContent = ("Wrong!");
                                             answerButtons.appendChild(line);
                                             answerButtons.appendChild(response);
+                                            timeLeft = (timeLeft - 10);
                                         }
 
                                         btn.addEventListener("click",function(event){
                                             var element = event.target;
                                             var correctAnswer5 = document.querySelector(".console\\.log");
-                                            console.log(correctAnswer5);
-
 
                                             // Add results screen
+                                            clearInterval(quizTimer);
+                                            console.log(quizTimer);
+                                            timer.textContent = "Time: 0";
                                             question.innerHTML = "All done!";
                                             question.style.textAlign = "left";
                                             answerButtons.innerHTML = "";
                                             answerButtons.style.textAlign = "left";
 
-
+                                            if(question === "All done!") {
+                                                clearInterval(quizTimer);
+                                                }
+                                            
                                             var result = document.createElement("div");
                                             var instruction = document.createElement("div");
                                             var initialsInput = document.createElement("input");
                                             var initialsSubmit = document.createElement("button");
 
                                             answerButtons.appendChild(result);
-                                            result.textContent = ("Your final score is " + timeLeft + ".");
                                             result.style.paddingBottom = "30px";
                                             answerButtons.appendChild(instruction);
-                                            instruction.textContent = "Enter initials:  ";
+                                            instruction.textContent = "Enter initials:    ";
                                             instruction.appendChild(initialsInput);
                                             initialsInput.style.marginBottom = "30px";
                                             instruction.appendChild(initialsSubmit);
                                             initialsSubmit.textContent = "Submit";
-                                            initialsSubmit.style.marginBottom = "30px";
-
-                                            var line = document.createElement("hr");
-                                            answerButtons.appendChild(line);
+                                            initialsSubmit.setAttribute("style","margin-bottom: 30px; margin-left: 20px;");
 
                                             if (element === correctAnswer5) {
                                                 response.textContent = ("Correct!");
+
+
                                                 answerButtons.appendChild(line);
                                                 answerButtons.appendChild(response);
+                                                result.textContent = ("Your final score is " + timeLeft + ".");
                                             }
                     
                                             else {
                                                 response.textContent = ("Wrong!");
                                                 answerButtons.appendChild(line);
                                                 answerButtons.appendChild(response);
+                                                timeLeft = (timeLeft - 10);
+                                                result.textContent = ("Your final score is " + timeLeft + ".");
                                             }
+
+                                            setTimeout(() => {
+                                                response.textContent = "";
+                                                line.style.display = "none";
+                                                
+                                            }, 1000);
+
+                                            var initials = [];
+
+                                            if (JSON.parse(localStorage.getItem("scores")) !== null) {
+                                                initials = JSON.parse(localStorage.getItem("scores"));
+                                            }
+
+                                            initialsSubmit.addEventListener("click", function() {
+                                                initials.push(initialsInput.value + timeLeft);
+                                                initialsInput.value = "";
+                                                localStorage.setItem("scores", JSON.stringify(initials));
+                                                
+                                            })
                                         })    
                                     }
                                 })
