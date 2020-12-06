@@ -5,7 +5,7 @@ var answerButtons = document.querySelector(".answerButtons");
 var line = document.createElement("hr");
 var response = document.createElement("div");
 response.setAttribute("style", "text-align: left; font-style: italic; color: rgb(151, 149, 149);");
-
+var timeleft = 
 
 // Make the start button clickable
 startBtn.addEventListener("click", function(){
@@ -55,6 +55,7 @@ startBtn.addEventListener("click", function(){
             var answers = ["quotes", "curly brackets", "parentheses", "square brackets"];
             answerButtons.innerHTML = "";
 
+            
             //Turn the second answer options into buttons
             for (i = 0; i< answers.length; i++) {
                 var btn = document.createElement("button");
@@ -63,7 +64,7 @@ startBtn.addEventListener("click", function(){
                 btn.setAttribute("style", "float: left; margin-right: 90%; margin-top: 5px; margin-bottom: 5px; text-align: left; width: 180px;");
                 btn.classList.add(answers[i].replace(/\s/g, ''));
 
-
+                //Alert correct or wrong
                 if (element === correctAnswer1) {
                     response.textContent = ("Correct!");
                     answerButtons.appendChild(line);
@@ -76,6 +77,8 @@ startBtn.addEventListener("click", function(){
                     answerButtons.appendChild(response);
                     timeLeft = (timeLeft - 10);
                 }
+
+                console.log(timeLeft);
 
                 //Make the second question answer buttons clickables
                 btn.addEventListener("click",function(event){
@@ -255,7 +258,7 @@ startBtn.addEventListener("click", function(){
                                             }
 
                                             initialsSubmit.addEventListener("click", function() {
-                                                initials.push(initialsInput.value + timeLeft);
+                                                initials.push(initialsInput.value + " " + timeLeft);
                                                 initialsInput.value = "";
                                                 localStorage.setItem("scores", JSON.stringify(initials));
                                                 

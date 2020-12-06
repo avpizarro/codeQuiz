@@ -26,6 +26,8 @@ function renderScores() {
       var li = document.createElement("li");
       li.textContent = renderScore;
       scoresList.appendChild(li);
+      li.setAttribute("style", "background: rgb(241, 232, 250);margin-top: 5px; margin-bottom: 5px; height: 2em;line-height: 2em");
+      scoresList.setAttribute("style", "list-style-type: decimal; list-style-position: inside;");
     }
 }
 
