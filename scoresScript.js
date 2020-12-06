@@ -17,6 +17,7 @@ enteredScores = [];
 
 init();
 
+// Set a function to display the scores list
 function renderScores() {
   
     // Render a new li for each score
@@ -31,9 +32,8 @@ function renderScores() {
     }
 }
 
+// Set a function to recover the stored scores so they can be displayed
 function init() {
-    // Get stored scores from localStorage
-    // Parsing the JSON string to an object
     var storedScores = JSON.parse(localStorage.getItem("scores"));
 
     if (storedScores !== null) { 

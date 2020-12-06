@@ -19,7 +19,7 @@ startBtn.addEventListener("click", function(){
         timer.textContent = ("Time: " + timeLeft);
 
         // Stop the timer
-        if(timeLeft<= 0) {
+        if(timeLeft <= 0) {
         clearInterval(quizTimer);
         }
         
@@ -108,7 +108,7 @@ startBtn.addEventListener("click", function(){
                         btn.classList.add(answers[i].replace(/\s/g, ''));
                         
                     
-
+                         //Alert correct or wrong
                         if (element === correctAnswer2) {
                             response.textContent = ("Correct!");
                             answerButtons.appendChild(line);
@@ -135,10 +135,7 @@ startBtn.addEventListener("click", function(){
                             var answers = ["commas", "curly brackets", "quotes", "parentheses"];
                             answerButtons.innerHTML = "";
 
-
-                            answerButtons.innerHTML = "";
-
-                            //Turn the third answer options into buttons
+                            //Turn the fourth answer options into buttons
                             for (i = 0; i< answers.length; i++) {
                                 var btn = document.createElement("button");
                                 btn.textContent = ([i+1]+ ". " + answers[i]);
@@ -146,7 +143,7 @@ startBtn.addEventListener("click", function(){
                                 btn.setAttribute("style", "float: left; margin-right: 90%; margin-top: 5px; margin-bottom: 5px; text-align: left; width: 250px;");
                                 btn.classList.add(answers[i].replace(/\s/g, ''));
                                                         
-
+                                //Alert correct or wrong
                                 if (element === correctAnswer3) {
                                     response.textContent = ("Correct!");
                                     answerButtons.appendChild(line);
@@ -160,6 +157,7 @@ startBtn.addEventListener("click", function(){
                                     timeLeft = (timeLeft - 10);
                                 }
 
+                                //Make the fourth question answer buttons clickable      
                                 btn.addEventListener("click",function(event){
                                     var element = event.target;
                                     var correctAnswer4 = document.querySelector(".quotes");
@@ -174,7 +172,7 @@ startBtn.addEventListener("click", function(){
                                     var answers = ["JavaScript", "terminal / bash", "for loops", "console.log"];
                                     answerButtons.innerHTML = "";
 
-
+                                    //Turn the fifth answer options into buttons
                                     for (i = 0; i< answers.length; i++) {
                                         var btn = document.createElement("button");
                                         btn.textContent = ([i+1]+ ". " + answers[i]);
@@ -183,6 +181,7 @@ startBtn.addEventListener("click", function(){
                                         btn.classList.add(answers[i].replace(/\s/g, ''));
                                         console.log(btn);
                                                 
+                                        //Alert correct or wrong
                                         if (element === correctAnswer4) {
                                             response.textContent = ("Correct!");
                                             answerButtons.appendChild(line);
@@ -196,6 +195,7 @@ startBtn.addEventListener("click", function(){
                                             timeLeft = (timeLeft - 10);
                                         }
 
+                                        //Make the fourth question answer buttons clickable 
                                         btn.addEventListener("click",function(event){
                                             var element = event.target;
                                             var correctAnswer5 = document.querySelector(".console\\.log");
@@ -209,9 +209,10 @@ startBtn.addEventListener("click", function(){
                                             answerButtons.innerHTML = "";
                                             answerButtons.style.textAlign = "left";
 
-                                            if(question === "All done!") {
+                                            //Stop the timer
+                                            if(question === "All done!" || timeLeft === 0) {
                                                 clearInterval(quizTimer);
-                                                }
+                                            }
                                             
                                             var result = document.createElement("div");
                                             var instruction = document.createElement("div");
@@ -228,10 +229,9 @@ startBtn.addEventListener("click", function(){
                                             initialsSubmit.textContent = "Submit";
                                             initialsSubmit.setAttribute("style","margin-bottom: 30px; margin-left: 20px;");
 
+                                            //Alert correct or wrong
                                             if (element === correctAnswer5) {
                                                 response.textContent = ("Correct!");
-
-
                                                 answerButtons.appendChild(line);
                                                 answerButtons.appendChild(response);
                                                 result.textContent = ("Your final score is " + timeLeft + ".");
@@ -245,12 +245,14 @@ startBtn.addEventListener("click", function(){
                                                 result.textContent = ("Your final score is " + timeLeft + ".");
                                             }
 
+                                            //Remove corrector wrong alert 
                                             setTimeout(() => {
                                                 response.textContent = "";
                                                 line.style.display = "none";
                                                 
                                             }, 1000);
 
+                                            //Input and store the result
                                             var initials = [];
 
                                             if (JSON.parse(localStorage.getItem("scores")) !== null) {
@@ -258,7 +260,7 @@ startBtn.addEventListener("click", function(){
                                             }
 
                                             initialsSubmit.addEventListener("click", function() {
-                                                initials.push(initialsInput.value + " " + timeLeft);
+                                                initials.push(initialsInput.value + " - " + timeLeft);
                                                 initialsInput.value = "";
                                                 localStorage.setItem("scores", JSON.stringify(initials));
                                                 
