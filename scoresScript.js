@@ -43,6 +43,3 @@ function init() {
 
 renderScores();
 
-console.log(enteredScores);
-console.log(scoresList);
-
